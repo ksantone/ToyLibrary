@@ -1,0 +1,174 @@
+<% if params[:advanced] == "true" and not (params[:query] or params[:author] or params[:category]) %>
+	<div class="col-md-6 col-md-offset-3">
+		<div class="submission-form">
+			<div  class="form-group">
+				<h1 class="title">advanced search</h1>
+			</div>
+
+			<%= form_tag books_path, :method => 'get' do %>
+				<div class="form-group">
+					<label class="form-control-label">Keywords</label>
+	    			<%= text_field_tag :query, params[:query], class: "form-control" %>
+	    		</div>
+	    		<div class="form-group">
+					<label class="form-control-label">Author</label>
+	    			<%= text_field_tag :author, params[:author], class: "form-control" %>
+	    		</div>
+	    		<div class="form-group">
+	    			<label class="form-control-label">Category</label>
+					<%= select_tag(:category, options_for_select(@categories),  :prompt => "Select a category") %>
+	    		</div>
+	    		<div  class="form-group">
+	    			<%= hidden_field_tag :advanced, "true" %>
+	    			<%= submit_tag "Search", class: "btn btn-primary btn-block" %>
+	    		</div>
+	  		<% end %>
+		</div>
+	</div>
+<% elsif params[:all_books] == "true" %>
+	<div id="all-books-header">
+		<h1>All Books</h1>
+		<li class="dropdown pull-right" id="filter-list">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filter <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li class="filter-category">
+					<%= link_to "All Books", books_path(all_books: "true") %>
+				</li>
+				<% Category.all.each do |category| %>
+					<li class="filter-category">
+						<%= link_to category.name, books_path(request.query_parameters.merge({all_books: "true", category: category.name, page: 1}))  %>
+					</li>
+				<% end %>
+			</ul>
+		</li>
+		<li class="dropdown pull-right" id="sort-list">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sort By <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li class="sort-category">
+					<%= link_to "Alphabetical", books_path(request.query_parameters.merge({all_books: "true", order: "alphabetical", page: 1})) %>
+				</li>
+				<li class="sort-category">
+					<%= link_to "Newest", books_path(request.query_parameters.merge({all_books: "true", order: "newest", page: 1})) %>
+				</li>
+				<li class="sort-category">
+					<%= link_to "Rating", books_path(request.query_parameters.merge({all_books: "true", order: "rating", page: 1})) %>
+				</li>
+			</ul>
+		</li>
+	</div>
+	<hr>
+	<div class="row">
+
+		<% if params[:order] == "alphabetical" %>
+
+			<% @books.order('LOWER(title)').each do |book| %>
+
+				<div class="col-md-3 col-sm-6">
+
+					<a href="/books/<%= book.id %>">
+						<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					</a>
+							
+				</div>
+
+			<% end %>
+
+		<% elsif params[:order] == "newest" %>
+
+			<% @books.order(:created_at).reverse_order.each do |book| %>
+
+				<div class="col-md-3 col-sm-6">
+
+					<a href="/books/<%= book.id %>">
+						<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					</a>
+							
+				</div>
+
+			<% end %>
+
+		<% elsif params[:order] == "rating" %>
+
+			<% @books.order("CAST(average_rating as FLOAT)").reverse_order.each do |book| %>
+
+				<div class="col-md-3 col-sm-6">
+
+					<a href="/books/<%= book.id %>">
+						<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					</a>
+							
+				</div>
+
+			<% end %>
+
+		<% else %>
+
+			<% @books.order(:average_rating).each do |book| %>
+
+				<div class="col-md-3 col-sm-6">
+
+					<a href="/books/<%= book.id %>">
+						<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					</a>
+							
+				</div>
+
+			<% end %>
+
+		<% end %>
+
+	</div>
+	<%= will_paginate @books, renderer: BootstrapPagination::Rails %>
+<% else %>
+	<% if @books.count == 0 %>
+		<h1>There are no books matching your search criteria.</h1>
+	<% else %>
+		<h1 class="search-results">Search Results</h1>
+		
+		<% @books.each do |book| %>
+
+			<div class="row book-in-search">
+
+				<div class="col-md-3 col-sm-6">
+					<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					</a>
+				</div>
+
+				<div class="col-md-6">
+					<a href="/books/<%= book.id %>"><h2 class="book-title"><%= book.title %></h2></a>
+					<span>Posted by: <a href=<%= account_path(Account.find(book.account_id)) %>><%= Account.find(book.account_id).first_name+" "+Account.find(book.account_id).last_name %></a></span>
+					<hr>
+					<h2>Average Rating</h2>
+					<% book.average_rating.to_i.times do  %>
+	 					<%= image_tag("star-on.png") %>
+					<% end %>
+					<% if book.average_rating-book.average_rating.to_i > 0.75 %>
+						<%= image_tag("star-on.png") %>
+						<% (4-book.average_rating.to_i).times do  %>
+	 						<%= image_tag("star-off.png") %>
+						<% end %>
+					<% elsif book.average_rating-book.average_rating.to_i > 0.25 %>
+						<%= image_tag("star-half.png") %>
+						<% (4-book.average_rating.to_i).times do  %>
+	 						<%= image_tag("star-off.png") %>
+						<% end %>
+					<% else %>
+						<% (5-book.average_rating.to_i).times do  %>
+	 						<%= image_tag("star-off.png") %>
+						<% end %>
+					<% end %>
+					<br/>
+					<span>Based on <%= book.reviews.count %> reviews</span>
+					<h3 class="book-author"><span>Written by</span> <%= book.author %></h3>
+					<p class="book-desc"><%= book.description %></p>
+				</div>
+
+			</div>
+
+		<% end %>
+
+		<%= will_paginate @books, renderer: BootstrapPagination::Rails %>
+	<% end %>
+
+<% end %>

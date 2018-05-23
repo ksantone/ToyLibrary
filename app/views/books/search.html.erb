@@ -1,0 +1,8 @@
+<div id="search-container">
+  <div id="logo"></div>
+  <%= form_tag books_path, :method => 'get' do %>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search For Books" %>
+    <%= link_to "Advanced Search", books_path(:advanced => "true"), :class => "advanced_search" %>
+  <% end %>
+</div>

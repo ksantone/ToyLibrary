@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Toy Library</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <% if current_page?(root_url) or params[:commit] %>
+        <div class="container">
+          <%= render 'flash_messages' %>
+        </div>
+
+        <% if params[:commit] %>
+          <div id="top-of-search">
+            <div id="search-object1">
+              <a href="/">
+                <img class="brand" height="38px" width="176px" src="<%= image_path('logo.png') %>">
+              </a>
+            </div>
+            <div id="search-object2">
+              <% if params[:commit] %>
+                  <%= form_tag books_path, :method => 'get', id: "search-wrapper" do %>
+                    
+                      <%= text_field_tag :query, params[:query], id: "small-search"  %>
+                    
+                      <%= submit_tag "Search", id: "small-search-button" %>
+                    
+                  <% end %>
+              <% end %>
+            </div>
+        <% end %>
+            <div id="search-object3">
+              <ul class="register-links">
+                <% if account_signed_in? %>
+                  <li><%= link_to "Sign Out", destroy_account_session_path, method: :delete, class: "btn btn-custom" %></li>
+                  <li><%= link_to "My Account", current_account, class: "btn btn-custom" %></li>
+                <% else %>
+                  <li><%= link_to "Log In", new_account_session_path, class: "btn btn-custom" %></li>
+                  <li><%= link_to "Sign Up", new_account_registration_path, class: "btn btn-custom" %></li>
+                <% end %>
+                <li><%= link_to "All Books", books_path(:all_books => "true"), class: "btn btn-custom" %></li>
+              </ul>
+            </div>
+        <% if params[:commit] %>
+          </div>
+          <div id="search-separator"></div>
+          <hr>
+        <% end %>
+        <div class="container">
+          <%= yield %>
+        </div>
+      <% else %>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container nav-container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-container">
+                <span class="sr-only">Show and Hide the Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="/">
+                <img class="brand" height="38px" width="176px" src="<%= image_path('logo.png') %>">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-container">
+              <ul class="nav navbar-nav navbar-right">
+                <% if account_signed_in? %>
+                  <li><%= link_to "All Books", books_path(:all_books => "true") %></li>
+                  <li><%= link_to "My Account", current_account %></li>
+                  <li><%= link_to "Sign Out", destroy_account_session_path, method: :delete %></li>
+                <% else %>
+                  <li><%= link_to "All Books", books_path(:all_books => "true") %></li>
+                  <li><%= link_to "Sign Up", new_account_registration_path %></li>
+                  <li><%= link_to "Log In", new_account_session_path %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      <% end %>
+
+      <% if not current_page?(root_url) %>
+        <% if not params[:commit] %>
+          <div class="container">
+            <%= render 'flash_messages' %>
+            <%= yield %>
+          </div>
+        <% end %>
+        <!-- Start of the Footer -->
+        <footer class="site-footer">
+          <div class="container footer-tags">
+            <p class="pull-left">Toy Library</p>
+            <p class="pull-right">© Kassim Santone</p>
+          </div>
+        </footer>
+        <!-- End of the Footer -->
+      <% end %>
+    </div>
+  </body>
+</html>

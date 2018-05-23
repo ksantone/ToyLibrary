@@ -1,0 +1,578 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Lora|Ubuntu:300,400,500); 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* Variables, mixins, etc.. */
+
+@mixin background-tile {
+	box-sizing: border-box;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 6px #ccc;
+	padding: 1.5em 1.25em;
+}
+
+
+/* General styles */
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background-color: #f5f5f5;
+	font-family: 'Lora', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 300;
+}
+
+p.alert, p.notice {
+	margin: 0;
+}
+
+
+/* Navbar/navigation styles */
+
+.navbar {
+	font-family: 'Ubuntu', sans-serif;
+	text-transform: uppercase;
+}
+.navbar-default {
+	background-color: #fff;
+	padding-bottom: 5px;
+	padding-top: 5px;
+
+	.navbar-nav > li > a {
+		color: #222;
+		&:hover {
+			color: darken(#f1c40f, 5%);
+			transition: 0.5s;
+		}
+	}
+
+	.navbar-header {
+
+		.navbar-brand {
+			color: #222;
+			letter-spacing: 1.4px;
+		}
+
+	}
+
+	.dropdown-menu > li > a:hover {
+		background-color: darken(#f1c40f, 5%);
+		color: #fff;
+	}
+
+	.navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+		background-color: darken(#f1c40f, 5%);
+		color: #fff;	
+	}
+
+}
+
+.dropdown-menu > .active > a {
+	background-color: #f1c40f;
+	color: #fff;
+}
+
+
+/* Button/link styles */
+
+.btn-custom {
+	color: darken(#f1c40f, 5%);
+	background-color: #fff;
+	border: 1px solid darken(#f1c40f, 5%);
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: darken(#f1c40f, 5%);
+		color: #fff;
+		transition: 0.5s;
+	}
+}
+
+.btn-custom2 {
+	color: #333;
+	background-color: #fff;
+	border: 1px solid #222;
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: #333;
+		color: #fff;
+		transition: 0.5s;
+	}	
+}
+
+#override-li {
+	z-index: 999;
+	color: darken(#f1c40f, 5%);
+	background-color: #fff;
+	&:hover {
+		text-decoration: none;
+		background-color: darken(#f1c40f, 5%);
+		color: #fff;
+		transition: 0.5s;
+	}
+}
+
+.links {
+
+	.btn-custom {
+		padding: 3px 10px;
+		font-weight: 300;
+	}
+
+}
+
+.book-links {
+
+	.btn-custom {
+		padding: 3px 10px;
+		font-weight: 300;
+		margin-top: 40px;	
+	}
+
+}
+
+/* Book styles */
+
+.book {
+	height: 350px;
+	width: 250px;
+	margin-bottom: 40px;
+	@include background-tile;
+}
+
+.book-show {
+	height: 475px;
+	width: 325px;
+}
+
+.book-info {
+	@include background-tile;
+
+	.book-title {
+		margin-top: 0;
+		font-size: 2em;
+	}
+
+	.avg-rating {
+		font-size: 1.5em;
+		margin-top: 15px;
+		margin-bottom: 5px;
+	}
+
+	.number-of-reviews {
+		font-size: 0.85em;
+		font-style: italic;
+	}
+
+	.book-author, .book-poster {
+		font-size: 1.5em;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		span {
+			font-size: 0.80em;
+		}	
+	}
+
+	.book-desc {
+		font-size: 1.05em;
+		line-height: 1.5;
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+
+}
+
+#all-books-header h1, li:not(.filter-category):not(.sort-category):not(.not-inline) {
+	display: inline-block;
+}
+
+#filter-list, #sort-list {
+	padding-top: 30px;
+	padding-right: 5px;
+}
+
+#filter-list a, #sort-list a {
+	color: #000000;
+}
+
+#sort-list {
+	padding-right: 25px;
+}
+
+/* User styles */
+
+.user-show {
+	
+	@include background-tile;
+
+}
+
+.user-info {
+
+	@include background-tile;
+}
+
+#booksowned, #books-signed-out {
+	@include background-tile;
+}
+
+#books-top li:not(.not-inline) {
+	display: inline-block;
+}
+
+#books-bottom li {
+	display: inline-block;
+}
+
+#books-signed-out {
+	margin-bottom: 50px;
+}
+
+
+/* current-category styles */
+
+.current-category, .search-results {
+	margin-bottom: 40px;
+}
+
+
+/* Reviews styles */
+
+.reviews {
+
+	@include background-tile;
+	margin-top: 40px;
+
+	h1 {
+		margin-top: 0;
+		margin-bottom: 15px;
+		font-size: 2em;
+	}
+
+	.review {
+		border-bottom: 1px solid gainsboro;
+		margin-bottom: 15px;
+		padding-bottom: 10px;
+
+		.review-comment {
+			font-size: 1.05em;
+			line-height: 1.5;
+		}
+
+	}
+
+	.new-review {
+		padding-top: 8px;
+	}
+
+}
+
+/* New Book Form styles */
+
+.new-book-form {
+	@include background-tile;
+
+	h1 {
+		margin-top: 0;
+	}
+
+	#category_id {
+		margin-bottom: 10px;
+	}
+
+	#book_book_img {
+		margin-bottom: 10px;
+	}
+
+}
+
+
+/* Edit Book Form styles */
+
+.edit-book-form {
+
+	@include background-tile;
+
+	h1 {
+		margin-top: 0;
+	}
+
+	#book_category_id {
+		margin-bottom: 10px;
+	}
+
+	#book_book_img {
+		margin-bottom: 10px;
+	}
+
+}
+
+/* New/Edit review form styles */
+
+.new-review-form, .edit-review-form {
+	@include background-tile;
+
+	h1 {
+		margin-top: 0;
+	}
+
+	#rating-form {
+		margin-bottom: 15px;
+
+		label {
+			display: block;
+		}
+
+	}
+
+}
+
+
+/* Signup/Login form styles */
+
+.title {
+
+	background: #007bbf;
+	padding: 10px;
+	text-align: center;
+	color: #fff;
+	border-radius: 0 0 10px 10px;
+
+}
+
+.submission-form {
+
+	margin-top: 35px;
+	box-shadow: 0 0 10px 1px grey;
+	border-radius: 5px;
+	padding-bottom: 20px;
+	background: white;
+
+}
+
+.form-group {
+
+	padding-left: 25px;
+	padding-right: 25px;
+
+}
+
+.signup-select {
+
+	padding-left: 49px;
+	padding-bottom: 12px;
+
+}
+
+.bottom-links {
+
+	display: inline-block;
+	text-align: center;
+
+}
+
+.register-links {
+
+	padding-right: 30px;
+
+}
+
+.register-links li {
+
+	display: inline;
+	float: right;
+	padding-top: 22px;
+	padding-right: 24px;
+
+}
+
+/* Search and navbar related styles */
+
+.container:not(.nav-container) {
+	padding-top: 10px;
+}
+
+#search-container {
+
+  padding-top: 180px;
+  width: 760;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+#logo {
+
+  width: 640px;
+  height: 120px;
+  background: url(image-path('logo.png')) top left no-repeat;
+  background-size: 100%;
+  margin: 0 auto;
+
+}
+
+#query:not(.form-control):not(#small-search) {
+
+  width: 732px;
+  padding: 7px;
+  margin: auto;
+  margin-top: 18px;
+  border: solid 1px #ccc;
+  display: block;
+  font-size: 16px;
+  border-radius: 15px;
+
+}
+
+#query:not(.form-control):not(#small-search):hover {
+  border-color: #aaa;
+}
+
+#search-wrapper {
+	display: inline-flex;
+	padding-left: 20px;
+}
+
+#small-search {
+	border: 0.1em solid #ddd;
+	border-radius: 0.5em 0 0 0.5em;
+	padding: 0.2em 0.5em;
+	height: 36px;
+	width: 360px;
+}
+
+#small-search-button {
+	margin-top: -1px;
+	height: 38px;
+	width: 90px;
+	font-size: 14px;
+	border: 0.1em solid #ddd;
+	background: #eee;
+  	color: #808080!important;
+  	border: solid 1px #fff;
+  	font-family: Arial, sans-serif;
+  	font-weight: bold;
+  	text-decoration: none;
+  	border-radius: 0 0.5em 0.5em 0;
+}
+
+input[value="Search For Books"], .advanced_search {
+  background: #eee;
+  color: #808080!important;
+  border: solid 1px #fff;
+  padding: 13px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin-top: 16px;
+  text-decoration: none;
+  border-radius: 7px;
+}
+
+.advanced_search {
+	padding: 15px;
+}
+
+form > #search-fields {
+	display: inline-block;
+}
+
+#top-of-search > #search-object1, #search-object2, #search-object3 {
+	display: inline-block;
+}
+
+#search-object1 {
+	vertical-align: top;
+	padding-top: 14px;
+	padding-left: 24px;
+}
+
+#search-object2 {
+	padding-top: 22px;
+	padding-left: 15px;
+}
+
+#search-object3 { 
+	float: right;
+}
+
+#search-separator {
+	height: 14px;
+}
+
+input[value="Search For Books"]:hover, .advanced_search:hover {
+  cursor: pointer;
+  background: #f8f7f6;
+  border: solid 1px #ccc;
+  text-decoration: none;
+}
+
+.book-in-search{
+	@include background-tile;
+	margin-bottom: 50px;
+}
+
+.brand {
+	margin-top: 9px;
+	margin-left: 12px;
+}
+
+/* Description page stylings */
+
+#description-buttons {
+	
+	display: inline-block;
+
+}
+
+/* Fixing up some padding issues */
+.row:not(.without-padding) {
+	padding-bottom: 30px;
+}
+
+/* Styling footer */
+
+#wrapper {
+	min-height: 100%;
+}
+
+.site-footer {
+	width: 100%;
+	background-color: #222;
+	color: #fff;
+	margin-top: 0px;
+	padding-top: 30px;
+}
+
+.footer-tags p {
+	display: inline-block;
+	padding-bottom: 25px;
+}

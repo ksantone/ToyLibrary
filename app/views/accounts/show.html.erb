@@ -1,0 +1,135 @@
+<div class="row without-padding" id="account-top">
+
+	<% if account_signed_in? and @account.id == current_account.id %>
+		<h1>My Account</h1>
+	<% else %>
+		<h1><%= @account.first_name+" "+@account.last_name+"'s Account" %></h1>
+	<% end %>
+
+</div>
+
+<hr>
+
+<div class="row">
+
+	<div class="col-md-4">
+		<div class="user-show">
+
+			<%= image_tag @account.account_img.url(:account_show) %>
+			<hr>
+			<%= link_to "Edit Photo", edit_account_registration_path(:description_edit => "false", :photo_edit => "true"), class: "btn btn-custom" %>
+
+		</div>
+	</div>
+
+	<div class="col-md-8">
+
+		<div class="user-info">
+
+			<h1>About <%= @account.first_name %></h1>
+
+			<hr>
+
+			<p><%= @account.about %></p>
+
+			<%= hidden_field :description_edit, value: "true" %>
+			<% if @account.about == nil or @account.about == "" %>
+				<%= link_to "Add Description", edit_account_registration_path(:description_edit => "true", :photo_edit => "false"), class: "btn btn-custom" %>
+			<% else %>
+				<hr>
+				<%= link_to "Edit Description", edit_account_registration_path(:description_edit => "true", :photo_edit => "false"), class: "btn btn-custom" %>
+			<% end %>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div id="booksowned">
+	<div id="books-top">
+		<% if account_signed_in? and @account.id == current_account.id %>
+			<li><h1>My Books</h1></li>
+		<% else %>
+			<li><h1><%= @account.first_name+" "+@account.last_name+"'s Books" %></h1></li>
+		<% end %>
+
+		<li class="dropdown btn btn-custom pull-right">
+			<a href="#" class="dropdown-toggle" id="override-li" data-toggle="dropdown" role="button" aria-expanded="false">Categories <span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li class="not-inline"><%= link_to "All Books", @account.id.to_s+"#booksowned" %></li>
+				<% Category.all.each do |category| %>
+					<li class="not-inline">
+						<%= link_to category.name, @account.id.to_s+"?category="+category.name+"#booksowned" %>
+					</li>
+				<% end %>
+			</ul>
+		</li>
+		<%= link_to "Add Book", new_book_path, class: "btn btn-custom pull-right" %>
+	</div>
+
+	<hr>
+
+	<% if @books.count == 0 %>
+		<% if params[:category] %>
+			<h3>This user has no books in this category.</h3>
+		<% else %>
+			<h3>This user has no books.</h3>
+		<% end %>
+	<% else %>
+
+		<div class="row">
+
+			<% @books.each do |book| %>
+
+				<div class="col-md-3 col-sm-6">
+
+					<a href="/books/<%= book.id %>">
+						<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					</a>
+						
+				</div>
+
+			<% end %>
+
+		</div>
+
+	<% end %>
+
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<div id="books-signed-out">
+
+	<div id="books-bottom">
+
+		<% if account_signed_in? and @account.id == current_account.id %>
+			<li><h1>Books Signed Out By Me</h1></li>
+		<% else %>
+			<li><h1><%= "Books Signed Out By "+@account.first_name+" "+@account.last_name %></h1></li>
+		<% end %>
+
+	</div>
+
+	<hr>
+
+	<div class="row">
+
+		<% @books_signed_out.each do |book| %>
+
+			<div class="col-md-3 col-sm-6">
+
+				<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+				</a>
+						
+			</div>
+
+		<% end %>
+
+	</div>
+
+</div>

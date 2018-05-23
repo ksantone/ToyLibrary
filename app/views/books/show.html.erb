@@ -1,0 +1,92 @@
+<div class="row">
+
+	<div class="col-md-4">
+		<div class="user-show">
+
+			<%= image_tag @book.book_img.url(:book_show), class: "book-show" %>
+
+			<% if account_signed_in? %>
+				<hr>
+				<% if @book.account_id != current_account.id %>
+					<% if @book.tempowner_id != current_account.id %>
+						<%= button_to "Sign Out Book", sign_out_book_book_path(id: @book.id), class: "btn btn-custom" %>
+					<% else %>
+						<%= button_to "Return Book", return_book_book_path(id: @book.id), class: "btn btn-custom" %>
+					<% end %>
+				<% end %>
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="col-md-8">
+
+		<div class="book-info">
+
+			<h2 class="book-title"><%= @book.title %></h2>
+			<h3 class="book-author"><span>Written by</span> <%= @book.author %></h3>
+			<h2>Average Rating</h2>
+			<% @average_review.to_i.times do  %>
+ 				<%= image_tag("star-on.png") %>
+			<% end %>
+			<% if @average_review-@average_review.to_i > 0.75 %>
+				<%= image_tag("star-on.png") %>
+				<% (4-@average_review.to_i).times do  %>
+ 					<%= image_tag("star-off.png") %>
+				<% end %>
+			<% elsif @average_review-@average_review.to_i > 0.25 %>
+				<%= image_tag("star-half.png") %>
+				<% (4-@average_review.to_i).times do  %>
+ 					<%= image_tag("star-off.png") %>
+				<% end %>
+			<% else %>
+				<% (5-@average_review.to_i).times do  %>
+ 					<%= image_tag("star-off.png") %>
+				<% end %>
+			<% end %>
+			<br/>
+			<span>Based on <%= @book.reviews.count %> reviews</span>
+			<p class="book-desc"><%= @book.description %></p>
+			<%= link_to "Back", root_path, class: "btn btn-custom" %>
+
+				<% if account_signed_in? %>
+
+					<% if @book.account_id == current_account.id %>
+						<%= link_to 'Edit', edit_book_path, class: "btn btn-custom" %>
+						<%= link_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom"  %>
+					<% end %>
+
+				<% end %>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+
+		<div class="reviews">
+
+			<!-- Where the review/ratings will go -->
+			<h1>Reviews</h1>
+			<%= render @book.reviews %>
+
+			<div>
+				<%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-custom"  %>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$('.review-rating').raty({
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+</script>
