@@ -14,12 +14,12 @@
 
   <body>
     <div id="wrapper">
-      <% if current_page?(root_url) or params[:commit] %>
+      <% if current_page?(root_url) or params[:query] %>
         <div class="container">
           <%= render 'flash_messages' %>
         </div>
 
-        <% if params[:commit] %>
+        <% if params[:query] %>
           <div id="top-of-search">
             <div id="search-object1">
               <a href="/">
@@ -90,7 +90,7 @@
       <% end %>
 
       <% if not current_page?(root_url) %>
-        <% if not params[:commit] %>
+        <% if not params[:query] %>
           <div class="container">
             <%= render 'flash_messages' %>
             <%= yield %>
