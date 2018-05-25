@@ -55,8 +55,6 @@ ActiveRecord::Schema.define(version: 2018_05_21_145253) do
     t.integer "account_id"
     t.integer "tempowner_id"
     t.float "average_rating", default: 0.0
-    t.index "to_tsvector('english'::regconfig, (title)::text)", name: "books_title", using: :gin
-    t.index "to_tsvector('english'::regconfig, description)", name: "books_description", using: :gin
   end
 
   create_table "categories", force: :cascade do |t|
