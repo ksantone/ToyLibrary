@@ -7,7 +7,6 @@ gem 'rails', '~> 5.2.0'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'simple_form', '~> 4.0'
-gem 'pg'
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'paperclip', '~> 6.0'
 gem 'puma', '~> 3.11'
@@ -29,10 +28,15 @@ group :development, :test do
 end
 
 group :development do
+  gem 'pg'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+	gem 'pg'
 end
 
 group :test do
