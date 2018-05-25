@@ -3,7 +3,7 @@
 	<div class="col-md-4">
 		<div class="user-show">
 
-			<%= image_tag @book.book_img.url(:style), class: "book-show" %>
+			<%= image_tag @book.book_img.image-url(:style), class: "book-show" %>
 
 			<% if account_signed_in? %>
 				<hr>
