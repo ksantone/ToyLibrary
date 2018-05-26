@@ -3,7 +3,7 @@ class Book < ApplicationRecord
 	belongs_to :category
 	has_many :reviews
 
-	has_attached_file :book_img, :styles => { :book_index => "250x350>", :book_show => "325x475>" }, default_url: "default-book.png"
+	has_attached_file :book_img, :styles => { :book_index => "250x350>", :book_show => "325x475>" }, default_url: ":styles/default-book.png"
 	validates_attachment_content_type :book_img, content_type: /\Aimage\/.*\z/
 
 	include PgSearch
