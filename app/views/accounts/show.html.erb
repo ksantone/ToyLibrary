@@ -15,7 +15,7 @@
 	<div class="col-md-4">
 		<div class="user-show">
 
-			<%= image_tag @account.account_img.image_tag(:style) %>
+			<%= image_tag @account.account_img.url(:style) %>
 			<hr>
 			<%= link_to "Edit Photo", edit_account_registration_path(:description_edit => "false", :photo_edit => "true"), class: "btn btn-custom" %>
 
