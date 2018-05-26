@@ -36,11 +36,10 @@
 				<h1>About <%= @account.first_name %></h1>
 			<% end %>
 
+			<hr>
+			<p><%= @account.about %></p>
+
 			<% if account_signed_in? and @account.id == current_account.id %>
-
-				<hr>
-
-				<p><%= @account.about %></p>
 
 				<%= hidden_field :description_edit, value: "true" %>
 				<% if @account.about == nil or @account.about == "" %>
