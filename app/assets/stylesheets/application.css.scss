@@ -231,10 +231,6 @@ p.alert, p.notice {
 	padding-bottom: 150px;
 }
 
-#pagination-fix {
-	height: 100px;
-}
-
 /* User styles */
 
 .user-show {
@@ -381,7 +377,6 @@ p.alert, p.notice {
 	margin-top: 35px;
 	box-shadow: 0 0 10px 1px grey;
 	border-radius: 5px;
-	margin-bottom: 140px;
 	padding-bottom: 10px;
 	background: white;
 
@@ -570,18 +565,19 @@ input[value="Search For Books"]:hover, .advanced_search:hover {
 /* Styling footer */
 
 #wrapper {
-	min-height: 100%;
+	min-height: 84%;
 }
 
 .site-footer {
 	width: 100%;
 	background-color: #222;
 	color: #fff;
-	margin-top: -95px;
-	padding-top: 30px;
+	margin-top: 30px;
+	padding-top: 35px;
 }
 
 .footer-tags p {
+	z-index: 999;
 	display: inline-block;
 	padding-bottom: 25px;
 }
