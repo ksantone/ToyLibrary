@@ -16,8 +16,13 @@
 		<div class="user-show">
 
 			<%= image_tag @account.account_img.url(:account_show) %>
-			<hr>
-			<%= link_to "Edit Photo", edit_account_registration_path(:description_edit => "false", :photo_edit => "true"), class: "btn btn-custom" %>
+
+			<% if account_signed_in? and @account.id == current_account.id %>
+			
+				<hr>
+				<%= link_to "Edit Photo", edit_account_registration_path(:description_edit => "false", :photo_edit => "true"), class: "btn btn-custom" %>
+
+			<% end %>
 
 		</div>
 	</div>
@@ -25,19 +30,26 @@
 	<div class="col-md-8">
 
 		<div class="user-info">
-
-			<h1>About <%= @account.first_name %></h1>
-
-			<hr>
-
-			<p><%= @account.about %></p>
-
-			<%= hidden_field :description_edit, value: "true" %>
-			<% if @account.about == nil or @account.about == "" %>
-				<%= link_to "Add Description", edit_account_registration_path(:description_edit => "true", :photo_edit => "false"), class: "btn btn-custom" %>
+			<% if account_signed_in? and @account.id == current_account.id %>
+				<h1>About Me</h1>
 			<% else %>
+				<h1>About <%= @account.first_name %></h1>
+			<% end %>
+
+			<% if account_signed_in? and @account.id == current_account.id %>
+
 				<hr>
-				<%= link_to "Edit Description", edit_account_registration_path(:description_edit => "true", :photo_edit => "false"), class: "btn btn-custom" %>
+
+				<p><%= @account.about %></p>
+
+				<%= hidden_field :description_edit, value: "true" %>
+				<% if @account.about == nil or @account.about == "" %>
+					<%= link_to "Add Description", edit_account_registration_path(:description_edit => "true", :photo_edit => "false"), class: "btn btn-custom" %>
+				<% else %>
+					<hr>
+					<%= link_to "Edit Description", edit_account_registration_path(:description_edit => "true", :photo_edit => "false"), class: "btn btn-custom" %>
+				<% end %>
+
 			<% end %>
 
 		</div>
