@@ -12,10 +12,9 @@
 
 <div class="row">
 
-	<div class="col-md-4">
-		<div class="user-show">
+		<div class="user-show account-top-items">
 
-			<%= image_tag @account.account_img.url(:account_show) %>
+			<%= image_tag @account.account_img.url(:account_show), id: "profile-pic" %>
 
 			<% if account_signed_in? and @account.id == current_account.id %>
 			
@@ -25,11 +24,8 @@
 			<% end %>
 
 		</div>
-	</div>
 
-	<div class="col-md-8">
-
-		<div class="user-info">
+		<div class="user-info account-top-items">
 			<% if account_signed_in? and @account.id == current_account.id %>
 				<h1>About Me</h1>
 			<% else %>
@@ -52,8 +48,6 @@
 			<% end %>
 
 		</div>
-
-	</div>
 
 </div>
 
@@ -93,13 +87,9 @@
 
 			<% @books.each do |book| %>
 
-				<div class="col-md-3 col-sm-6">
-
-					<a href="/books/<%= book.id %>">
-						<%= image_tag book.book_img.url(:book_index), class: "book" %>
-					</a>
-						
-				</div>
+				<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book account-books" %>
+				</a>
 
 			<% end %>
 
@@ -134,7 +124,7 @@
 			<div class="col-md-3 col-sm-6">
 
 				<a href="/books/<%= book.id %>">
-					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+					<%= image_tag book.book_img.url(:book_index), class: "book account-books" %>
 				</a>
 						
 			</div>

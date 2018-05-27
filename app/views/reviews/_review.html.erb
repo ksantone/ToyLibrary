@@ -6,7 +6,12 @@
 	<% (5-review.rating.to_i).times do %>
  		<%= image_tag("star-off.png") %>
 	<% end %>
-	<p class="review-comment"><%= review.comment %></p>
+
+	<% if review.comment != "" %>
+		<p class="review-comment"><%= review.comment %></p>
+	<% else %>
+		<i><p class="review-comment">Comment left blank by user...</p></i>
+	<% end %>
 
 	<% if account_signed_in? %>
 

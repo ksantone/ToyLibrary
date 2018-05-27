@@ -23,7 +23,7 @@
           <div id="top-of-search">
             <div id="search-object1">
               <a href="/">
-                <img class="brand" height="38px" width="176px" src="<%= image_path('logo.png') %>">
+                <img class="brand" src="<%= image_path('logo.png') %>">
               </a>
             </div>
             <div id="search-object2">
@@ -38,18 +38,22 @@
               <% end %>
             </div>
         <% end %>
-            <div id="search-object3">
-              <ul class="register-links">
-                <% if account_signed_in? %>
-                  <li><%= link_to "Sign Out", destroy_account_session_path, method: :delete, class: "btn btn-custom" %></li>
-                  <li><%= link_to "My Account", current_account, class: "btn btn-custom" %></li>
-                <% else %>
-                  <li><%= link_to "Log In", new_account_session_path, class: "btn btn-custom" %></li>
-                  <li><%= link_to "Sign Up", new_account_registration_path, class: "btn btn-custom" %></li>
-                <% end %>
-                <li><%= link_to "All Books", books_path(:all_books => "true"), class: "btn btn-custom" %></li>
-              </ul>
-            </div>
+        <% if not current_page?(root_url) %>
+          <div id="search-object3">
+        <% else %>
+          <div id="search-object3 display-always">
+        <% end %>
+            <ul class="register-links register-links-in-search">
+              <% if account_signed_in? %>
+                <li><%= link_to "Sign Out", destroy_account_session_path, method: :delete, class: "btn btn-custom" %></li>
+                <li><%= link_to "My Account", current_account, class: "btn btn-custom" %></li>
+              <% else %>
+                <li><%= link_to "Log In", new_account_session_path, class: "btn btn-custom" %></li>
+                <li><%= link_to "Sign Up", new_account_registration_path, class: "btn btn-custom" %></li>
+              <% end %>
+              <li><%= link_to "All Books", books_path(:all_books => "true"), class: "btn btn-custom" %></li>
+            </ul>
+          </div>
         <% if params[:commit] %>
           </div>
           <div id="search-separator"></div>

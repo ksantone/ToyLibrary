@@ -57,19 +57,15 @@
 		</li>
 	</div>
 	<hr>
-	<div class="row">
+	<div class="row" id="all-books-row">
 
 		<% if params[:order] == "alphabetical" %>
 
 			<% @books.order('LOWER(title)').each do |book| %>
 
-				<div class="col-md-3 col-sm-6">
-
-					<a href="/books/<%= book.id %>">
-						<%= image_tag book.book_img.url(:book_index), class: "book" %>
-					</a>
-							
-				</div>
+				<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+				</a>
 
 			<% end %>
 
@@ -77,13 +73,9 @@
 
 			<% @books.order(:created_at).reverse_order.each do |book| %>
 
-				<div class="col-md-3 col-sm-6">
-
-					<a href="/books/<%= book.id %>">
-						<%= image_tag book.book_img.url(:book_index), class: "book" %>
-					</a>
-							
-				</div>
+				<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+				</a>
 
 			<% end %>
 
@@ -91,13 +83,9 @@
 
 			<% @books.order("CAST(average_rating as FLOAT)").reverse_order.each do |book| %>
 
-				<div class="col-md-3 col-sm-6">
-
-					<a href="/books/<%= book.id %>">
-						<%= image_tag book.book_img.url(:book_index), class: "book" %>
-					</a>
-							
-				</div>
+				<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+				</a>
 
 			<% end %>
 
@@ -105,13 +93,9 @@
 
 			<% @books.order(:average_rating).each do |book| %>
 
-				<div class="col-md-3 col-sm-6">
-
-					<a href="/books/<%= book.id %>">
-						<%= image_tag book.book_img.url(:book_index), class: "book" %>
-					</a>
-							
-				</div>
+				<a href="/books/<%= book.id %>">
+					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+				</a>
 
 			<% end %>
 
@@ -127,35 +111,35 @@
 		
 		<% @books.each do |book| %>
 
-			<div class="row book-in-search">
+			<div class="book-in-search">
 
-				<div class="col-md-3 col-sm-6">
+				<div class="search-sections search-item-pic">
 					<a href="/books/<%= book.id %>">
-					<%= image_tag book.book_img.url(:book_index), class: "book" %>
+						<%= image_tag book.book_img.url(:book_index), class: "book search-books" %>
 					</a>
 				</div>
-
-				<div class="col-md-6">
+				
+				<div class="search-sections search-item-info">
 					<a href="/books/<%= book.id %>"><h2 class="book-title"><%= book.title %></h2></a>
 					<span>Posted by: <a href=<%= account_path(Account.find(book.account_id)) %>><%= Account.find(book.account_id).first_name+" "+Account.find(book.account_id).last_name %></a></span>
 					<hr>
 					<h2>Average Rating</h2>
 					<% book.average_rating.to_i.times do  %>
-	 					<%= image_tag("star-on.png") %>
+		 				<%= image_tag("star-on.png") %>
 					<% end %>
 					<% if book.average_rating-book.average_rating.to_i > 0.75 %>
 						<%= image_tag("star-on.png") %>
 						<% (4-book.average_rating.to_i).times do  %>
-	 						<%= image_tag("star-off.png") %>
+		 					<%= image_tag("star-off.png") %>
 						<% end %>
 					<% elsif book.average_rating-book.average_rating.to_i > 0.25 %>
 						<%= image_tag("star-half.png") %>
 						<% (4-book.average_rating.to_i).times do  %>
-	 						<%= image_tag("star-off.png") %>
+		 					<%= image_tag("star-off.png") %>
 						<% end %>
 					<% else %>
 						<% (5-book.average_rating.to_i).times do  %>
-	 						<%= image_tag("star-off.png") %>
+		 					<%= image_tag("star-off.png") %>
 						<% end %>
 					<% end %>
 					<br/>

@@ -163,9 +163,20 @@ p.alert, p.notice {
 
 .book {
 	height: 350px;
-	width: 250px;
 	margin-bottom: 40px;
 	@include background-tile;
+}
+
+.book:not(.account-books):not(.search-books) {
+	margin-left: 16px;
+	margin-right: 16px;
+	width: 22%;
+}
+
+.account-books {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 22%;
 }
 
 .book-show {
@@ -236,12 +247,23 @@ p.alert, p.notice {
 .user-show {
 	
 	@include background-tile;
+	width: 38%;
 
 }
 
 .user-info {
 
 	@include background-tile;
+	width: 58%;
+	float: right;
+}
+
+.account-top-items {
+	display: inline-block;
+}
+
+#profile-pic {
+	width: 100%;
 }
 
 #booksowned, #books-signed-out {
@@ -257,7 +279,7 @@ p.alert, p.notice {
 }
 
 #books-signed-out {
-	margin-bottom: 50px;
+	margin-bottom: 0px;
 }
 
 
@@ -547,6 +569,26 @@ input[value="Search For Books"]:hover, .advanced_search:hover {
 .brand {
 	margin-top: 9px;
 	margin-left: 12px;
+	height: 38px;
+	width: 176px;
+}
+
+.search-sections {
+	display: inline-block;
+}
+
+.search-books {
+	float: left;
+	width: 320px;
+}
+
+.search-item-info {
+	float: right;
+	width: 65%;
+}
+
+.search-books {
+	width: 285px;
 }
 
 /* Description page stylings */
@@ -585,3 +627,244 @@ input[value="Search For Books"]:hover, .advanced_search:hover {
 #footer-spacing {
 	height: 100px;
 }
+
+/* Media Queries */
+@media only screen and (max-width: 1199px) {
+
+	.book:not(.account-books):not(.search-books) {
+		width: 30%;
+		margin-left: 13px;
+		margin-right: 13px;
+	}
+
+	.account-books {
+		width: 28%;
+		margin-left: 17px;
+		margin-right: 17px;
+	}
+
+	.brand {
+		margin-top: 9px;
+		margin-left: 9px;
+		height: 34px;
+		width: 154px;
+	}
+
+	#small-search {
+		height: 33px;
+		width: 280px;
+	}
+
+	#small-search-button {
+		height: 33px;
+		width: 68px;
+	}
+
+	.register-links-in-search {
+		padding-right: 10px;
+	}
+
+	.register-links-in-search li {
+		padding-top: 22px;
+		padding-right: 10px;
+	}
+
+	.register-links-in-search li a {
+		font-size: 12px;
+	}
+
+}
+
+@media only screen and (max-width: 991px) {
+
+	.book:not(.account-books):not(.search-books) {
+		width: 37%;
+		margin-left: 38px;
+		margin-right: 38px;
+	}
+
+	.account-books {
+		width: 40%;
+		margin-left: 32px;
+		margin-right: 32px;
+	}
+
+	#all-books-row {
+		padding-left: 35px;
+	}
+
+	.book-in-search {
+		width: 95%;
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 50px;
+	}
+
+	.brand {
+		height: 30px;
+		width: 136px;
+	}
+
+	.search-books {
+		width: 280px;
+	}
+
+	.search-item-info {
+		float: right;
+		width: 50%;
+	}
+
+}
+
+@media only screen and (max-width: 880px) {
+	#search-object3:not(.display-always) {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 776px) {
+
+	#logo {
+		width: 482px;
+	}
+
+	.register-links {
+		padding-right: 8px;
+	}
+
+	.register-links li, .register-links-in-search li {
+		display: inline;
+		float: right;
+		padding-top: 22px;
+		padding-right: 7px;
+	}
+
+	.brand {
+		margin-left: 4px;
+		height: 28px;
+		width: 118px;
+	}
+
+	input[value="Search For Books"], .advanced_search {
+		font-size: 12px;
+	}
+
+	input[value="Search For Books"] {
+		padding: 10px;
+	}
+
+	.advanced_search {
+		padding-top: 11px;
+		padding-bottom: 12px;
+	}
+
+	#query:not(.form-control):not(#small-search) {
+		margin-top: 6px;
+		width: 498px;
+	}
+
+	.user-show {
+		margin-left: 15px;
+		width: 38%;
+	}
+
+	.user-info {
+		margin-right: 15px;
+		width: 50%;
+	}
+
+	.book:not(.account-books):not(.search-books) {
+		display: block;
+		width: 320px;
+		height: 400px;
+		float: none;
+		margin: 0 auto;
+		margin-bottom: 68px;
+	}
+
+	.search-books {
+		width: 260px;
+	}
+
+	.search-item-info {
+		float: right;
+		width: 48%;
+	}
+
+	.account-books {
+		display: block;
+		width: 290px;
+		margin: 0 auto;
+		margin-bottom: 37px;
+	}
+
+	.book-in-search {
+		width: 90%;
+		margin: 0 auto;
+		margin-bottom: 50px;
+	}
+
+}
+
+@media only screen and (max-width: 662px) {
+
+	.search-books {
+		width: 290px;
+		display: block;
+		float: none;
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+
+	.search-item-info {
+		float: none;
+		width: 100%;
+	}
+
+	.search-sections {
+		display: block;
+	}
+
+}
+
+@media only screen and (max-width: 580px) {
+
+	#logo {
+		width: 412px;
+	}
+
+	.register-links {
+		padding-right: 6px;
+	}
+
+	.register-links li {
+		padding-top: 10px;
+		padding-right: 0px;
+	}
+
+	.register-links li a {
+		font-size: 12px;
+	}
+
+	#query:not(.form-control):not(#small-search) {
+		margin-top: 0;
+		width: 424px;
+	}
+
+	.user-show {
+		display: block;
+		margin: 0 auto;
+		width: 62%;
+		margin-bottom: 40px;
+	}
+
+	.user-info {
+		display: block;
+		float: none;
+		margin: 0 auto;
+		width: 90%;
+	}
+
+}
+
+
