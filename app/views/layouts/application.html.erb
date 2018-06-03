@@ -10,6 +10,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="<%= image_path('toylibrary.png') %>">
   </head>
 
   <body>
@@ -77,7 +78,7 @@
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-container">
-              <ul class="nav navbar-nav navbar-right">
+              <ul class="nav navbar-nav navbar-right" id="nav-items">
                 <% if account_signed_in? %>
                   <li><%= link_to "All Books", books_path(:all_books => "true") %></li>
                   <li><%= link_to "My Account", current_account %></li>

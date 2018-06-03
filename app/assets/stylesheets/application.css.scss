@@ -459,7 +459,7 @@ p.alert, p.notice {
 
   width: 640px;
   height: 120px;
-  background: url(image-path('logo.png')) top left no-repeat;
+  background: url(""+image-path('logo.png')) top left no-repeat;
   background-size: 100%;
   margin: 0 auto;
 
@@ -739,10 +739,13 @@ input[value="Search For Books"]:hover, .advanced_search:hover {
 		padding-right: 7px;
 	}
 
+	#nav-items li {
+		text-align: center;
+		display: block;
+	}
+
 	.brand {
-		margin-left: 4px;
-		height: 28px;
-		width: 118px;
+		margin-left: 34px;
 	}
 
 	input[value="Search For Books"], .advanced_search {
