@@ -145,8 +145,10 @@
 					<br/>
 					<span>Based on <%= book.reviews.count %> reviews</span>
 					<h3 class="book-author"><span>Written by</span> <%= book.author %></h3>
-					<p class="book-desc"><%= book.description %></p>
+					<p class="book-desc"><%= truncate(book.description, length: 140) %></p>
 				</div>
+
+				<div id="search-spacing"></div>
 
 			</div>
 

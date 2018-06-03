@@ -1,27 +1,21 @@
 <div class="row">
 
-	<div class="col-md-4">
-		<div class="user-show">
+		<div class="single-book-show book-top-items">
 
-			<%= image_tag @book.book_img.url(:book_show), class: "book-show" %>
+			<%= image_tag @book.book_img.url(:book_show), id: "book-pic" %>
 
-			<% if account_signed_in? %>
+			<% if account_signed_in? and @book.account_id != current_account.id %>
 				<hr>
-				<% if @book.account_id != current_account.id %>
-					<% if @book.tempowner_id != current_account.id %>
-						<%= button_to "Sign Out Book", sign_out_book_book_path(id: @book.id), class: "btn btn-custom" %>
-					<% else %>
-						<%= button_to "Return Book", return_book_book_path(id: @book.id), class: "btn btn-custom" %>
-					<% end %>
+				<% if @book.tempowner_id != current_account.id %>
+					<%= button_to "Sign Out Book", sign_out_book_book_path(id: @book.id), class: "btn btn-custom" %>
+				<% else %>
+					<%= button_to "Return Book", return_book_book_path(id: @book.id), class: "btn btn-custom" %>
 				<% end %>
 			<% end %>
 
 		</div>
-	</div>
 
-	<div class="col-md-8">
-
-		<div class="book-info">
+		<div class="single-book-info book-top-items">
 
 			<h2 class="book-title"><%= @book.title %></h2>
 			<h3 class="book-author"><span>Written by</span> <%= @book.author %></h3>
@@ -59,8 +53,6 @@
 				<% end %>
 
 		</div>
-
-	</div>
 
 </div>
 

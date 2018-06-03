@@ -179,7 +179,7 @@ p.alert, p.notice {
 	width: 22%;
 }
 
-.book-show {
+.book-show, .account-show {
 	height: 475px;
 	width: 325px;
 }
@@ -244,25 +244,29 @@ p.alert, p.notice {
 
 /* User styles */
 
-.user-show {
+.user-show, .single-book-show {
 	
 	@include background-tile;
 	width: 38%;
 
 }
 
-.user-info {
+.user-info, .single-book-info {
 
 	@include background-tile;
 	width: 58%;
 	float: right;
 }
 
-.account-top-items {
+.account-top-items, .book-top-items {
 	display: inline-block;
 }
 
 #profile-pic {
+	width: 100%;
+}
+
+#book-pic {
 	width: 100%;
 }
 
@@ -453,6 +457,10 @@ p.alert, p.notice {
   margin: 0 auto;
   text-align: center;
 
+}
+
+#search-spacing {
+	height: 50px;
 }
 
 #logo {
@@ -766,12 +774,12 @@ input[value="Search For Books"]:hover, .advanced_search:hover {
 		width: 498px;
 	}
 
-	.user-show {
+	.user-show, .single-book-show {
 		margin-left: 15px;
 		width: 38%;
 	}
 
-	.user-info {
+	.user-info, .single-book-info {
 		margin-right: 15px;
 		width: 50%;
 	}
@@ -854,14 +862,14 @@ input[value="Search For Books"]:hover, .advanced_search:hover {
 		width: 424px;
 	}
 
-	.user-show {
+	.user-show, .single-book-show {
 		display: block;
 		margin: 0 auto;
 		width: 62%;
 		margin-bottom: 40px;
 	}
 
-	.user-info {
+	.user-info, .single-book-info {
 		display: block;
 		float: none;
 		margin: 0 auto;
