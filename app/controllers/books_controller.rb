@@ -2,6 +2,7 @@ class BooksController < ApplicationController
 	before_action :find_book, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_account!, only: [:new, :edit]
 
+	# This function considers both the case of search and viewing all books
 	def index
 		if params[:query] != ""
 			@categories = Category.all.pluck(:name)
@@ -40,6 +41,7 @@ class BooksController < ApplicationController
 		end
 	end
 
+	# Determines average rating of book
 	def show
 		if @book.reviews.blank?
 			@average_review = 0
@@ -48,6 +50,7 @@ class BooksController < ApplicationController
 		end
 	end
 
+	# These 2 functions deal with building new books when signed in
 	def new
 		@book = current_account.books.build
 		@categories = Category.all.map{ |c|  [c.name, c.id] }
@@ -64,6 +67,7 @@ class BooksController < ApplicationController
 		end
 	end
 
+	# These 3 functions deal with editing, updating and destroying existing books
 	def edit
 		@categories = Category.all.map{ |c|  [c.name, c.id] }
 	end
@@ -83,6 +87,7 @@ class BooksController < ApplicationController
 		redirect_to root_path
 	end
 
+	# These functions allow accounts to sign out (up to 3) and return books
 	def sign_out_book
 		@book = Book.find(params[:id])
 		if current_account.on_hold < 3
@@ -101,6 +106,7 @@ class BooksController < ApplicationController
 		redirect_to request.referrer
 	end
 
+	# Private methods
 	private
 
 		def book_params

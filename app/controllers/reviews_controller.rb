@@ -3,6 +3,7 @@ class ReviewsController < ApplicationController
 	before_action :find_review, only: [:edit, :update, :destroy]
 	before_action :authenticate_account!, only: [:new, :edit]
 
+	# These 2 functions allow users to review (other accounts') books
 	def new
 		@review = Review.new
 		if account_signed_in?
@@ -26,6 +27,7 @@ class ReviewsController < ApplicationController
 		end
 	end
 
+	# These 3 functions allow accounts to edit, update and destroy their reviews
 	def edit
 		@book.update_attributes(:average_rating => @book.reviews.average(:rating).round(2))
 	end
@@ -43,6 +45,7 @@ class ReviewsController < ApplicationController
 		redirect_to book_path(@book)
 	end
 
+	# Private methods
 	private
 
 		def review_params

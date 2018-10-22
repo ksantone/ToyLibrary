@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
 
+	# This function gets a given users books (which can be filtered by category)
 	def show
 		@account = Account.find(params[:id])
 		@books_signed_out = Book.where(:tempowner_id => @account.id)

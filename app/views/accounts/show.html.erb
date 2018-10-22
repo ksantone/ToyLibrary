@@ -121,13 +121,9 @@
 
 		<% @books_signed_out.each do |book| %>
 
-			<div class="col-md-3 col-sm-6">
-
 				<a href="/books/<%= book.id %>">
 					<%= image_tag book.book_img.url(:book_index), class: "book account-books" %>
 				</a>
-						
-			</div>
 
 		<% end %>
 
